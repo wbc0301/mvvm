@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>a的值是====={{obj.a}}</p>
+        <div>b的值是====={{obj.b}}</div>
+        <div>ww的值是====={{ww}}</div>
+        <div>ww的值是====={{ww}}</div>
+        <div>ww的值是====={{ab}}</div>
+        <input type="text" v-model='a'> {{ab}}
+        <div>数据变化相应视图：{{ab}}</div>
+        <div>数据变化相应视图：{{ab}}</div>
+    </div>
+
+    <script src="./mvvm.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                obj: {
+                    a: 'aaa',
+                    b: 'bbb'
+                },
+                ww: '111',
+                a: 1,
+                b: 2
+            },
+            computed: {
+                ab() {
+                    return this.a - -this.b;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
