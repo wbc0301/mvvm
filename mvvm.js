@@ -32,8 +32,8 @@ function observe (data) {
 	return new Observe(data);
 }
 function Observe(data) {  // [əbˈzɜ:rv]观察 研究
-	let dep = new Dep();  // data 中的每个对象都会对应一个 dep 对象， data 对象上的每个属性都会被追加 getter setter
 	for(let key in data) {  // 循环遍历data
+		let dep = new Dep();  // data 中的每个对象都会对应一个 dep 对象， data 对象上的每个属性都会被追加 getter setter
 		let value = data[key];
 		observe(value);
 		Object.defineProperty(data, key, { // Object.defineProperty的方式定义属性
@@ -114,7 +114,10 @@ Dep.prototype.addSub = function(sub) { // 1: 订阅
 	this.subs.push(sub);
 };
 Dep.prototype.notify = function() {    // 2: 发布     notify  [ˈnoʊtɪfaɪ] 通知 发布
-	this.subs.forEach(sub => sub.update());
+	this.subs.forEach(sub => {
+		console.log('当前数据对应的 dep 实例的 notify 函数被执行了。。。');
+		sub.update()
+	});
 };
 function Watcher(vm, exp, fn) { // 这个类创建的实例都有update方法
 	this.vm = vm;
