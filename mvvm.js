@@ -3,6 +3,10 @@
 *
 * */
 
+// 响应式分为两个流程：
+// 1：收集依赖 dep.addSub(Dep.target)       observe -->  new Dep() -->  Object.defineProperty  -->  首次编译 new Watcher() 时触发 getter 这时 watcher 实例(带有update方法)被 dep 实例收集到依赖队列。 
+// 2：视图更新 dep.notify()                 触发 setter -->  执行 dep.notify() -->  遍历执行依赖队列里的所有 watcher 实例的 update 方法 -->  执行函数。
+
 function Vue(options = {}) {
 	this.$options = options;// 模仿Vue的套路
 	var data = this._data = this.$options.data;
@@ -35,7 +39,7 @@ function Observe(data) {  // [əbˈzɜ:rv]观察 研究
 		Object.defineProperty(data, key, { // Object.defineProperty的方式定义属性
 			enumerable: true, // 可枚举
 			get() {
-				Dep.target && dep.addSub(Dep.target); // [watcher]            1：订阅     所有的读取都不会添加订阅，只有 new Watcher 的时候才添加 就是因为:  Dep.tearget&&   。     把 watcher 实例 push 进 subs 列表
+				Dep.target && dep.addSub(Dep.target); // [watcher]            1：订阅     所有的读取都不会添加订阅，只有 new Watcher 的时候才添加 就是因为:  Dep.target 开关的存在  
 				return value;
 			},
 			set(newVal) { // 更改值的时候
@@ -49,6 +53,11 @@ function Observe(data) {  // [əbˈzɜ:rv]观察 研究
 }
 
 // 2: 编译函数
+
+// 编译函数做两件事：
+// 	   1：正则替换完成首次编译
+// 	   2：同时 new Watcher()  -->  打开添加依赖开关  -->  读取 data 数据 -->  触发 getter --> 完成依赖搜集
+
 function Compile(el, vm) {
 	vm.$el = document.querySelector(el);// 获取容器元素
 	let fragment = document.createDocumentFragment();// 文档碎片
