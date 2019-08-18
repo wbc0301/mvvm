@@ -110,7 +110,7 @@ function Compile(el, vm) {
 function Dep() {
 	this.subs = [];
 }
-Dep.prototype.addSub = function(sub) { // 1: 订阅
+Dep.prototype.addSub = function(sub) { // 1: 订阅   subscription  缓存列表，用户存放回调函数以便通知订阅者。
 	this.subs.push(sub);
 };
 Dep.prototype.notify = function() {    // 2: 发布     notify  [ˈnoʊtɪfaɪ] 通知 发布
