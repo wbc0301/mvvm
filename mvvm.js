@@ -32,8 +32,8 @@ function observe (data) {
 	return new Observe(data);
 }
 function Observe(data) {  // [əbˈzɜ:rv]观察 研究
+	let dep = new Dep();  // data 中的每个对象都会对应一个 dep 对象， data 对象上的每个属性都会被追加 getter setter  Vue 添加依赖的粒度是每个组件，所以 dep 是在这里实例化的，不是在 for 循环里边
 	for(let key in data) {  // 循环遍历data
-		let dep = new Dep();  // data 中的每个对象都会对应一个 dep 对象， data 对象上的每个属性都会被追加 getter setter
 		let value = data[key];
 		observe(value);
 		Object.defineProperty(data, key, { // Object.defineProperty的方式定义属性
