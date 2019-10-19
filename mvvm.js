@@ -10,7 +10,7 @@
 function Vuf(options = {}) {
 	this.$options = options;// 模仿Vue的套路
 	var data = this._data = this.$options.data;
-	observe(data);// 调用观察函数，递归的添加数据劫持
+	observe(data); // 调用观察函数，递归的添加数据劫持
 	for(let key in data) {
 		Object.defineProperty(this, key, { // 访问和修改每一个this的key时代理成this._data的值。
 			enumerable : true,
@@ -46,7 +46,7 @@ function Observe(data) {  // [əbˈzɜ:rv]观察 研究
 				if(newVal === value) {return;}
 				value = newVal; // 这里只用给value赋值就可以了，下次取值的时候后再get函数中将这个value返回
 				observe(newVal); // 如果设置的值是一个对象，同样对这个对象做数据劫持
-				dep.notify(); // 让所有的 watcher 的 update 方法执行               2：发布
+				dep.notify(); // 让所有的 watcher 的 update 方法执行            2：发布
 			}
 		})
 	}
