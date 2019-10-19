@@ -141,7 +141,7 @@ Watcher.prototype.update = function() {
 };
 
 
-
+// 计算属性
 function initComputed() {
 	let vm = this;
 	let computed = this.$options.computed;
