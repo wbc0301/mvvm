@@ -8,14 +8,16 @@
 
 <body>
     <div id="app">
-        <p>a的值是====={{obj.a}}</p>
-        <div>b的值是====={{obj.b}}</div>
-        <div>ww的值是====={{ww}}</div>
-        <div>ww的值是====={{ww}}</div>
-        <div>ww的值是====={{ab}}</div>
-        <input type="text" v-model='a'> {{ab}}
-        <div>数据变化相应视图：{{ab}}</div>
-        <div>数据变化相应视图：{{ab}}</div>
+        <div>text的值是====={{text}}</div>
+        <div>text的值是====={{text}}</div>
+
+        <p>obj.a的值是====={{obj.a}}</p>
+        <p>obj.b的值是====={{obj.b}}</p>
+
+
+        {{num1}} + <input type="text" v-model='num2'> {{num2}}
+        <div>和是（计算属性）====={{all}}</div>
+
     </div>
 
     <script src="./mvvm.js"></script>
@@ -23,17 +25,17 @@
         let vm = new Vue({
             el: '#app',
             data: {
+                text: 'abc',
                 obj: {
                     a: 'aaa',
                     b: 'bbb'
                 },
-                ww: '111',
-                a: 1,
-                b: 2
+                num1: 1,
+                num2: 2
             },
             computed: {
-                ab() {
-                    return this.a - -this.b;
+                all() {
+                    return this.num1 - -this.num2;
                 }
             }
         })
