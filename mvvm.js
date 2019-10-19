@@ -7,7 +7,7 @@
 // 1：收集依赖 dep.addSub(Dep.target)       observe -->  new Dep() -->  Object.defineProperty  -->  首次编译 new Watcher() 时触发 getter 这时 watcher 实例(带有update方法)被 dep 实例收集到依赖队列。 
 // 2：视图更新 dep.notify()                 触发 setter -->  执行 dep.notify() -->  遍历执行依赖队列里的所有 watcher 实例的 update 方法 -->  执行函数。
 
-function Vue(options = {}) {
+function Vuf(options = {}) {
 	this.$options = options;// 模仿Vue的套路
 	var data = this._data = this.$options.data;
 	observe(data);// 调用观察函数，递归的添加数据劫持
